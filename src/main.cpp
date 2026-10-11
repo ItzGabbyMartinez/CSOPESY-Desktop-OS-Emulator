@@ -9,6 +9,8 @@
 //To connect our separate files
 #include "desktop.h"
 #include "task_manager.h"
+#include "taskbar.h"
+#include "apps.h"
 
 // Set to false while developing if you want a normal 1280x720 window
 static const bool kFullscreen = true;
@@ -81,6 +83,10 @@ int main()
     // Temporary state for testing the Task Manager (Tanngalin niyo na lang)
     bool showTaskManager = true;
 
+    // Temporary state for testing the apps
+    bool showApp1 = true;
+    bool showApp2 = true;
+
     // Main application loop
     while (!glfwWindowShouldClose(window))
     {
@@ -94,6 +100,9 @@ int main()
         // Render system components (desktop first = at the back)
         renderDesktop(&running);
         renderTaskManager(&showTaskManager);
+        renderApp1(&showApp1);
+        renderApp2(&showApp2);
+        renderTaskbar(&showTaskManager, &showApp1, &showApp2);
 
         // PWR button confirmed shutdown
         if (!running)
