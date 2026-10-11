@@ -12,6 +12,7 @@ IMGUI = lib/imgui
 SOURCES = \
 	src/main.cpp \
 	src/task_manager.cpp \
+	src/desktop.cpp \
 	$(IMGUI)/imgui.cpp \
 	$(IMGUI)/imgui_draw.cpp \
 	$(IMGUI)/imgui_tables.cpp \
