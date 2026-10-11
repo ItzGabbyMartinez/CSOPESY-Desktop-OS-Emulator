@@ -1,5 +1,6 @@
 #include "taskbar.h"
 #include "imgui.h"
+#include "imgui_internal.h"
 
 #include <GLFW/glfw3.h>
 #include "stb_image.h"
@@ -72,19 +73,22 @@ void renderTaskbar(bool* showTaskManager, bool* showApp1, bool* showApp2)
 
     ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.07f, 0.09f, 0.16f, 0.95f));
 
-    ImGui::Begin("Taskbar", nullptr,
-                 ImGuiWindowFlags_NoTitleBar |
-                 ImGuiWindowFlags_NoResize |
-                 ImGuiWindowFlags_NoMove |
-                 ImGuiWindowFlags_NoScrollbar |
-                 ImGuiWindowFlags_NoCollapse |
-                 ImGuiWindowFlags_NoSavedSettings);
+    if (ImGui::Begin("Taskbar", nullptr,
+                     ImGuiWindowFlags_NoTitleBar |
+                     ImGuiWindowFlags_NoResize |
+                     ImGuiWindowFlags_NoMove |
+                     ImGuiWindowFlags_NoScrollbar |
+                     ImGuiWindowFlags_NoCollapse |
+                     ImGuiWindowFlags_NoSavedSettings))
+    {
+        ImGui::BringWindowToDisplayFront(ImGui::GetCurrentWindow());
 
-    iconButton("##tasks", tasksIcon, "Tasks", showTaskManager);
-    ImGui::SameLine();
-    iconButton("##app1", app1Icon, "App 1", showApp1);
-    ImGui::SameLine();
-    iconButton("##app2", app2Icon, "App 2", showApp2);
+        iconButton("##tasks", tasksIcon, "Tasks", showTaskManager);
+        ImGui::SameLine();
+        iconButton("##app1", app1Icon, "App 1", showApp1);
+        ImGui::SameLine();
+        iconButton("##app2", app2Icon, "App 2", showApp2);
+    }
 
     ImGui::End();
     ImGui::PopStyleColor();

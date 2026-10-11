@@ -6,7 +6,7 @@
 #include "backends/imgui_impl_glfw.h"
 #include "backends/imgui_impl_opengl3.h"
 
-//To connect our separate files
+// To connect our separate files
 #include "desktop.h"
 #include "task_manager.h"
 #include "taskbar.h"
@@ -17,7 +17,7 @@ static const bool kFullscreen = true;
 
 int main()
 {
-    // Initialize GLFW (Starting point)
+    // Initialize GLFW
     if (!glfwInit())
     {
         std::cerr << "Failed to initialize GLFW.\n";
@@ -39,6 +39,8 @@ int main()
         GLFWmonitor* monitor = glfwGetPrimaryMonitor();
         const GLFWvidmode* mode = glfwGetVideoMode(monitor);
 
+        glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+
         window = glfwCreateWindow(
             mode->width,
             mode->height,
@@ -46,6 +48,7 @@ int main()
             nullptr,
             nullptr
         );
+        glfwSetWindowPos(window, 0, 0);
     }
     else
     {
@@ -72,10 +75,18 @@ int main()
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
 
+    ImGuiIO& io = ImGui::GetIO();
+    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    
+    // Enable ImGui's built-in software cursor drawing
+    io.MouseDrawCursor = true;
+
     ImGui::StyleColorsDark();
 
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glslVersion);
+
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 
     // System state: set to false by the PWR button on the desktop
     bool running = true;
@@ -111,14 +122,8 @@ int main()
         // Render ImGui
         ImGui::Render();
 
-        int displayWidth;
-        int displayHeight;
-
-        glfwGetFramebufferSize(
-            window,
-            &displayWidth,
-            &displayHeight
-        );
+        int displayWidth, displayHeight;
+        glfwGetFramebufferSize(window, &displayWidth, &displayHeight);
 
         glViewport(0, 0, displayWidth, displayHeight);
         glClearColor(0.10f, 0.10f, 0.10f, 1.00f);
@@ -129,7 +134,7 @@ int main()
         glfwSwapBuffers(window);
     }
 
-    // Clean up resources (For Shutdown)
+    // Clean up resources
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();

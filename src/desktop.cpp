@@ -85,6 +85,8 @@ void renderDesktop(bool* running)
 
     ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(12.0f, 10.0f));
     ImGui::PushStyleColor(ImGuiCol_MenuBarBg, ImVec4(0.07f, 0.09f, 0.16f, 0.95f));
+    ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(1.0f, 1.0f, 1.0f, 1.0f));
+    ImGui::PushStyleColor(ImGuiCol_WindowBg, ImVec4(0.07f, 0.09f, 0.16f, 0.95f));
 
     if (ImGui::BeginMainMenuBar())
     {
@@ -120,6 +122,10 @@ void renderDesktop(bool* running)
             ImGuiCond_Appearing,
             ImVec2(0.5f, 0.5f));
 
+        // Explicit colors for modal popup so theme toggling doesn't make text invisible
+        ImGui::PushStyleColor(ImGuiCol_PopupBg, ImVec4(0.12f, 0.14f, 0.20f, 0.98f));
+        ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.95f, 0.95f, 0.95f, 1.0f));
+
         if (ImGui::BeginPopupModal("Shut Down?", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
         {
             ImGui::Text("Are you sure you want to shut down?");
@@ -139,9 +145,12 @@ void renderDesktop(bool* running)
             ImGui::EndPopup();
         }
 
+        ImGui::PopStyleColor(2);
+
         ImGui::EndMainMenuBar();
     }
 
     ImGui::PopStyleVar();
     ImGui::PopStyleColor();
+    ImGui::PopStyleColor(2);
 }
