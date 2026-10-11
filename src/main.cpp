@@ -43,7 +43,7 @@ int main()
             mode->width,
             mode->height,
             "CSOPESY Desktop OS Emulator",
-            monitor,
+            nullptr,
             nullptr
         );
     }
