@@ -33,8 +33,8 @@ void renderTaskManager(bool* isOpen)
                 "System",
                 "Desktop",
                 "Task Manager",
-                "Application 1",
-                "Application 2"
+                "File Explorer",
+                "System Settings"
             };
 
             const char* cpuUsage[] = {

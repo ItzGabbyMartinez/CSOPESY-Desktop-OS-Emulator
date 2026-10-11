@@ -100,8 +100,8 @@ int main()
         // Render system components (desktop first = at the back)
         renderDesktop(&running);
         renderTaskManager(&showTaskManager);
-        renderApp1(&showApp1);
-        renderApp2(&showApp2);
+        renderFileExplorer(&showApp1);
+        renderSystemSettings(&showApp2);
         renderTaskbar(&showTaskManager, &showApp1, &showApp2);
 
         // PWR button confirmed shutdown
