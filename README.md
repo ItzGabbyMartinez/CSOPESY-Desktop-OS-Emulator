@@ -12,6 +12,12 @@ Built using **C++17, GLFW, OpenGL 3, and Dear ImGui**.
 - **DIMAUNAHAN, Chelsea Jei**
 - **MANALANG, Kennese Ross**
 - **MARTINEZ, Gabrielle**
+---
+## Entry File
+
+src/main.cpp
+
+The main() function is located in source/main.cpp.
 
 ---
 
