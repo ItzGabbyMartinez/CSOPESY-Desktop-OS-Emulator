@@ -17,7 +17,7 @@ Built using **C++17, GLFW, OpenGL 3, and Dear ImGui**.
 
 src/main.cpp
 
-The main() function is located in source/main.cpp.
+The main() function is located in src/main.cpp.
 
 ---
 
