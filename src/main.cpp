@@ -90,11 +90,7 @@ int main()
 
     // System state: set to false by the PWR button on the desktop
     bool running = true;
-
-    // Temporary state for testing the Task Manager (Tanngalin niyo na lang)
     bool showTaskManager = true;
-
-    // Temporary state for testing the apps
     bool showApp1 = true;
     bool showApp2 = true;
 
